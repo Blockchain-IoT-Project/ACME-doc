@@ -1,37 +1,75 @@
 % !TeX spellcheck = de_DE
-% Ich hab schon länger nix mehr mit LaTeX gemacht also verzeiht mir falls ich etwas rostig bin
 
-
-
-\documentclass{article}
-
-\title{ACME}
-\author{Leonard Pudwitz}
-\date{December 2019}
-
-
+\documentclass[12pt]{report}
 % Packages
 \usepackage{natbib}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage[]{acronym}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\newlength{\drop}
 
+
+\usepackage[paper=a4paper,left=25mm,right=25mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\graphicspath{{./Pictures/}}
+
+%%nicer Chapters
+\usepackage{titlesec, blindtext, color}
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
 
 \begin{document}
+\pagenumbering{gobble}
+\begin{titlepage}
+    \drop=0.1\textheight
+    \centering
+    \vspace*{\baselineskip}
+    \rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+    \rule{\textwidth}{0.4pt}\\[\baselineskip]
+    {\LARGE ACME \\ [0.3\baselineskip]A Company Making Everything}\\[0.2\baselineskip]
+    \rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+    \rule{\textwidth}{1.6pt}\\[\baselineskip]
+    \scshape
+    Frankfurt University of Applied Sciences \\Informatik Projekt - WS 19/20. 2020
+    \date{4 February 2019} \par
+    \vspace*{2\baselineskip}
+    Erstellt von \\[\baselineskip]
+    {\Large Philipp Schlarb (1208526) \par}
+    {\Large Leonard Pudwitz (xxxx) \par}
+    {\Large Fabian Grun(xxxx) \par}
+    {\Large Tobias  (xxxx) \par}
+    \vfill
+    
+    \vfill{}
+    {\scshape Januar 2020} \\
+\end{titlepage}
+\tableofcontents
 
-\maketitle
 \newpage
 
-\section{Abstract}
+\chapter{Abstract}
 Der Kernaspekt des Projektes ist es, mit Hilfe einer Blockchain Lösung die Erfassung von Sensordaten bei einer Produktionslinie gegen spätere Manipulationen abzusichern. 
 
-\section{Anwendungsfall}
+\chapter{Anwendungsfall}
 In unserem Fall gibt es hierzu Sensoren an einem Fließband, die beim Vorbeifahren eines Produktes die eindeutige Identifikationsnummer dessen erfassen können, und unter dieser ihren momentanen Sensorwert abspeichern.
 Da gegebenenfalls mehrere Produkte aus einem entstehen können und je nach Kunden die Sicht auf die Sensordaten angepasst werden sollte, schreibt jeder Sensor seine Daten in seine eigene Blockchain, sodass im Nachhinein entschieden werden kann, welche Organisation Zugriff auf welche Sensordaten bekommt. Es liegt somit an der Definition des Produktionsablaufs, Sinn aus den abgespeicherten Sensordaten zu machen.
 
-\section{Netzwerkarchitektur}
+\chapter{Netzwerkarchitektur}
 
-\section{Chaincode} % TODO: Sourcecode hinzufügen
+\chapter{Chaincode} % TODO: Sourcecode hinzufügen
 Wie im letzten Kapitel beschrieben, schreibt jeder Sensor seine aufgezeichneten Daten in einen separaten Channel. Daher wird in dem Ledger dieses Channels lediglich für ein bestimmtes Produkt als Schlüssel der Sensorwert zu diesem Zeitpunkt abgespeichert. Damit ergeben sich folgende Methoden:
 \begin{itemize}
     \item init [unit]
@@ -51,11 +89,11 @@ Um den Sensorwert eines Produktes danach wieder auzulesen, wird die Methode quer
 \section{Applikationen}
 Es wird hier zwischen zwei Applikationen unterschieden, namentlich der Sensorapplikation zum einspeisen neuer Daten in die Bockchain, sowie einer Applikation mit der ein Kunde die Sensordaten am Ende auslesen kann.
 
-\subsection{Sensorapplikation}
+\section{Sensorapplikation}
 
-\subsection{Clientapplikation}
+\section{Clientapplikation}
 
-\section{Zusammenfassend}
+\chapter{Fazit}
 
 
 \bibliographystyle{plain}
