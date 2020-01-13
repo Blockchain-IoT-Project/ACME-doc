@@ -1,0 +1,22 @@
+Wie im letzten Kapitel beschrieben, schreibt jeder Sensor seine aufgezeichneten Daten in einen separaten Channel. Daher wird in dem Ledger dieses Channels lediglich für ein bestimmtes Produkt als Schlüssel der Sensorwert zu diesem Zeitpunkt abgespeichert. Damit ergeben sich folgende Methoden:
+\begin{itemize}
+    \item init [unit]
+    \item getUnit
+    \item write [item id] [value] [timestamp]
+    \item query [item id]
+\end{itemize}{}
+
+Init wird während der Instantiierung des Chaincode aufgerufen und legt mit dem Parameter unit die gemessene Einheit des Sensors fest. Da die init Methode nachträglich nicht noch einmal erreicht werden kann, wird hier direkt beim Aufbau des Channels eine Messeinheit festgelegt und sicher in die Blockchain geschrieben. Dies stellt gleichzeitig sicher, dass es keinen Channel ohne klar definierte Messeinheit geben kann.
+
+Damit eine Applikation für jeden Channel die Messeinheit auch auslesen kann, gibt es die Methode getUnit, welche lediglich die vorher spezifizierte Einheit zurückgibt. Rein technisch wäre die Ausgabe der Einheit allerdings auch mit einem query auf die ID 'unit' möglich.
+
+Write wird vom Sensor aufgerufen, wenn ein neues Produkt, welches auf dem Fließband vorbei fährt, erkannt wird. Hierzu überreicht der Sensor die gerade gelesene ID zusammen mit seinem aktuellen Sensorwert und einem Zeitstempel an das Netzwerk, welches das Tupel aus Sensorwert und Zeit unter der ID abspeichert. Um ein Überschreiben von beispielweise der Messeinheit des Channels zu vermeiden, prüft die Methode vorher die ID auf bereits belegte Zeichen. Falls dies der Fall sein sollte, wird ein Fehler zurückgegeben.
+
+Um den Sensorwert eines Produktes danach wieder auzulesen, wird die Methode query aufgerufen. Sie benötigt die ID als Parameter und gibt danach einen JSON-String mit dem Sensorwert und Timestamp zurück.
+
+\section{Applikationen}
+Es wird hier zwischen zwei Applikationen unterschieden, namentlich der Sensorapplikation zum einspeisen neuer Daten in die Bockchain, sowie einer Applikation mit der ein Kunde die Sensordaten am Ende auslesen kann.
+
+\section{Sensorapplikation}
+
+\section{Clientapplikation}
